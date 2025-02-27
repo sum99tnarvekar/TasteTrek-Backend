@@ -45,8 +45,8 @@ export const placeOrder = async (req , res) => {
             const session = await stripe.checkout.sessions.create({
                 line_items: lineItems,
                 mode: 'payment',
-                success_url: `http://localhost:5173/verify?success=true&orderId=${orderId}`,
-                cancel_url: `http://localhost:5173/verify?success=false&orderId=${orderId}`
+                success_url: `https://tastetrekfrontend.netlify.app/verify?success=true&orderId=${orderId}`,
+                cancel_url: `https://tastetrekfrontend.netlify.app/verify?success=false&orderId=${orderId}`
             });            
             res.json({success : 'true' , session_url : session.url})
         });
