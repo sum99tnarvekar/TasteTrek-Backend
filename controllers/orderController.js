@@ -76,7 +76,7 @@ export const verifyOrder = async (req , res) => {
             });
         }
     } catch (error) {
-        res.status(500).json({ message: "Internal server error"});
+        return res.status(500).json({ error: error.message || "Internal server error" });
     }
 }
 
@@ -90,7 +90,7 @@ export const userOrders = async (req, res) => {
             res.status(200).json({ orders: result });
         });
     } catch (error) {
-        res.status(500).json({ error: "Something went wrong" });
+        return res.status(500).json({ error: error.message || "Internal server error" });
     }
 };
 
@@ -103,7 +103,7 @@ export const listOrders = async (req, res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Something went wrong" });
+        return res.status(500).json({ error: error.message || "Internal server error" });
     }
 }
 
@@ -120,6 +120,6 @@ export const updateOrderStatus = async (req , res) => {
         });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Something went wrong" });
+        return res.status(500).json({ error: error.message || "Internal server error" });
     }
 }

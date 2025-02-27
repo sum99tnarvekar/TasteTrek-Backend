@@ -23,7 +23,7 @@ export const userLogin = async (req , res) => {
         });
     } catch (error) {
         console.error("Error in userLogin:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: error.message || "Internal server error" });
     }
 }
 
@@ -60,6 +60,6 @@ export const userSignup = async (req , res) => {
         });
     } catch (error) {
         console.error("Error in userSignup:", error);
-        return res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: error.message || "Internal server error" });
     }
 }

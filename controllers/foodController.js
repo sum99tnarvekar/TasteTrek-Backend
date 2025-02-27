@@ -12,26 +12,33 @@ export const addFood = (req, res) => {
     const sqlQuery = "INSERT INTO food (name, description, price, image, category) VALUES (?, ?, ?, ?, ?)";
     const values = [name, description, price, image, category];
 
-    db.query(sqlQuery, values, (err, result) => {
-        if (err) {
-            console.error("Error adding food:", err);
-            return res.status(500).json({ error: "Failed to add food item" });
-        }
-        res.status(200).json({ message: "Food item added successfully", foodId: result.insertId });
-    });
+    try {
+        db.query(sqlQuery, values, (err, result) => {
+            if (err) {
+                console.error("Error adding food:", err);
+                return res.status(500).json({ error: "Failed to add food item" });
+            }
+            res.status(200).json({ message: "Food item added successfully", foodId: result.insertId });
+        });
+    } catch (error) {
+        return res.status(500).json({ error: error.message || "Internal server error" });
+    }
 };
 
 
 export const listFood = (req , res) => {
     const sqlQuery = "SELECT * FROM food";
-
-    db.query(sqlQuery, (err, result) => {
-        if (err) {
-            console.error("Error fetching food items:", err);
-            return res.status(500).json({ error: "Failed to fetch food items" });
-        }
-        res.status(200).json(result);
-    });
+    try {
+        db.query(sqlQuery, (err, result) => {
+            if (err) {
+                console.error("Error fetching food items:", err);
+                return res.status(500).json({ error: "Failed to fetch food items" });
+            }
+            res.status(200).json(result);
+        });
+    } catch (error) {
+        return res.status(500).json({ error: error.message || "Internal server error" });
+    }
 };
 
 export const deleteFood = (req , res) => {
