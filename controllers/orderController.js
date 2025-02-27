@@ -48,7 +48,7 @@ export const placeOrder = async (req , res) => {
                 success_url: `https://tastetrekfrontend.netlify.app/verify?success=true&orderId=${orderId}`,
                 cancel_url: `https://tastetrekfrontend.netlify.app/verify?success=false&orderId=${orderId}`
             });            
-            res.json({success : 'true' , session_url : session.url})
+            res.status(200).json({success : 'true' , session_url : session.url})
         });
     });
 }
